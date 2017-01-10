@@ -65,6 +65,7 @@ function fullcalendar_library() {
     'website' => 'http://arshaw.com/fullcalendar',
     'version' => FULLCALENDAR_MIN_PLUGIN_VERSION,
     'js' => array(
+      $path . '/lib/moment.min.js' => array(),
       fullcalendar_get_js_path() => array(),
       $path . '/gcal.js' => array(),
     ),

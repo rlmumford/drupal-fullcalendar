@@ -33,7 +33,7 @@ Drupal.fullcalendar.plugins.fullcalendar = {
           }
         }
       },
-      events: function (start, end, callback) {
+      events: function (start, end, timezone, callback) {
         // Fetch new items from Views if possible.
         if (settings.ajax && settings.fullcalendar_fields) {
           fullcalendar.dateChange(settings.fullcalendar_fields);

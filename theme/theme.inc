@@ -58,6 +58,7 @@ function template_preprocess_fullcalendar(&$variables) {
     $function = $module . '_fullcalendar_options_process';
     $function($variables, $settings);
   }
+  dpm($settings);
 
   // Add settings to Drupal.settings.
   $variables['element']['#attached']['js'][] = array(

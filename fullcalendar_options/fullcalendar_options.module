@@ -46,50 +46,50 @@ function fullcalendar_options_fullcalendar_api() {
 function _fullcalendar_options_list($show_all = FALSE) {
   $form = array();
 
-  $form['firstHour'] = array(
+  $form['scrollTime'] = array(
     '#type' => 'textfield',
     '#title' => t('First hour'),
-    '#description' => t('Determines the first hour that will be visible in the scroll pane.'),
-    '#size' => 2,
-    '#maxlength' => 2,
-    '#default_value' => 6,
-    '#data_type' => 'int',
+    '#description' => t('Determines the first time that will be visible in the scroll pane.'),
+    '#size' => 8,
+    '#maxlength' => 8,
+    '#default_value' => '06:00:00',
+    '#data_type' => 'string',
   );
   $form['minTime'] = array(
     '#type' => 'textfield',
     '#title' => t('Minimum time'),
-    '#description' => t('Determines the first hour/time that will be displayed, even when the scrollbars have been scrolled all the way up.'),
-    '#size' => 2,
-    '#maxlength' => 2,
-    '#default_value' => 0,
-    '#data_type' => 'int',
+    '#description' => t('Determines the first time that will be displayed, even when the scrollbars have been scrolled all the way up.'),
+    '#size' => 8,
+    '#maxlength' => 8,
+    '#default_value' => '00:00:00',
+    '#data_type' => 'string',
   );
   $form['maxTime'] = array(
     '#type' => 'textfield',
     '#title' => t('Maximum time'),
-    '#description' => t('Determines the last hour/time (exclusively) that will be displayed, even when the scrollbars have been scrolled all the way down.'),
-    '#size' => 2,
-    '#maxlength' => 2,
-    '#default_value' => 24,
-    '#data_type' => 'int',
+    '#description' => t('Determines the last time (exclusively) that will be displayed, even when the scrollbars have been scrolled all the way down.'),
+    '#size' => 8,
+    '#maxlength' => 8,
+    '#default_value' => '24:00:00',
+    '#data_type' => 'string',
   );
-  $form['slotMinutes'] = array(
+  $form['slotDuration'] = array(
     '#type' => 'textfield',
-    '#title' => t('Slot minutes'),
-    '#description' => t('The frequency for displaying time slots, in minutes.'),
-    '#size' => 2,
-    '#maxlength' => 2,
-    '#default_value' => 30,
-    '#data_type' => 'int',
+    '#title' => t('Slot duration'),
+    '#description' => t('The frequency for displaying time slots.'),
+    '#size' => 8,
+    '#maxlength' => 8,
+    '#default_value' => '00:30:00',
+    '#data_type' => 'string',
   );
-  $form['defaultEventMinutes'] = array(
+  $form['defaultTimedEventDuration'] = array(
     '#type' => 'textfield',
-    '#title' => t('Default event minutes'),
-    '#description' => t('Determines the length (in minutes) an event appears to be when it has an unspecified end date.'),
-    '#size' => 4,
-    '#maxlength' => 4,
-    '#default_value' => 120,
-    '#data_type' => 'int',
+    '#title' => t('Default Timed Event Duration'),
+    '#description' => t('Duration event appears to be when it has an unspecified end date.'),
+    '#size' => 8,
+    '#maxlength' => 8,
+    '#default_value' => '02:00:00',
+    '#data_type' => 'string',
   );
   $form['allDaySlot'] = array(
     '#type' => 'checkbox',
@@ -110,20 +110,6 @@ function _fullcalendar_options_list($show_all = FALSE) {
     '#title' => t('Lazy fetching'),
     '#description' => t('Determines when event fetching should occur.'),
     '#default_value' => TRUE,
-    '#data_type' => 'bool',
-  );
-  $form['disableDragging'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Disable dragging'),
-    '#description' => t('Disables all event dragging, even when events are editable.'),
-    '#default_value' => FALSE,
-    '#data_type' => 'bool',
-  );
-  $form['disableResizing'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Disable resizing'),
-    '#description' => t('Disables all event resizing, even when events are editable.'),
-    '#default_value' => FALSE,
     '#data_type' => 'bool',
   );
   $form['dragRevertDuration'] = array(
