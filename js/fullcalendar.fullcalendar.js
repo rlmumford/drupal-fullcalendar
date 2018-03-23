@@ -62,21 +62,19 @@ Drupal.fullcalendar.plugins.fullcalendar = {
         // next and previous buttons if we re-enter here again.
         fullcalendar.navigate = true;
       },
-      eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
+      eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
         $.post(
           Drupal.settings.basePath + 'fullcalendar/ajax/update/drop/' + event.eid,
-          'field=' + event.field + '&entity_type=' + event.entity_type + '&index=' + event.index + '&day_delta=' + dayDelta + '&minute_delta=' + minuteDelta + '&all_day=' + allDay + '&dom_id=' + event.dom_id,
+          'field=' + event.field + '&entity_type=' + event.entity_type + '&index=' + event.index + '&delta=' + delta.toISOString() + '&all_day=' + event.allDay + '&dom_id=' + event.dom_id,
           fullcalendar.update
         );
-        return false;
       },
-      eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
+      eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
         $.post(
           Drupal.settings.basePath + 'fullcalendar/ajax/update/resize/' + event.eid,
-          'field=' + event.field + '&entity_type=' + event.entity_type + '&index=' + event.index + '&day_delta=' + dayDelta + '&minute_delta=' + minuteDelta + '&dom_id=' + event.dom_id,
+          'field=' + event.field + '&entity_type=' + event.entity_type + '&index=' + event.index + '&delta=' + delta.toISOString() + '&all_day=' + event.allDay + '&dom_id=' + event.dom_id,
           fullcalendar.update
         );
-        return false;
       }
     };
 

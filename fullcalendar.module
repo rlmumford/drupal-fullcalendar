@@ -160,31 +160,38 @@ function fullcalendar_update($action, $eid) {
   $index = check_plain($_POST['index']);
 
   $all_day = isset($_POST['all_day']) ? check_plain($_POST['all_day']) : '';
-  $delta = ' ' . check_plain($_POST['day_delta']) . ' days ' . check_plain($_POST['minute_delta']) . ' minutes';
+  $delta = isset($_POST['delta']) ? check_plain($_POST['delta']) : '';
   $entity_type = check_plain($_POST['entity_type']);
   $entity = entity_load($entity_type, array($eid));
   $entity = reset($entity);
 
   $langcode = field_language($entity_type, $entity, $field);
   $item = &$entity->{$field}[$langcode][$index];
-  $old_start = $item['value'];
-  $old_end = $item['value2'];
 
   // Adjust for different date formats.
   $format = date_type_format($item['date_type']);
 
-  // Datestamp can't combine with words for strtotime, convert to ISO for now.
-  if ($format == DATE_FORMAT_UNIX) {
-    $old_start = date(DATE_FORMAT_ISO, $old_start);
-    $old_end = date(DATE_FORMAT_ISO, $old_end);
+  $invert = FALSE;
+  if (strpos($delta, '-') === 0) {
+    $delta = substr($delta, 1);
+    $invert = TRUE;
+  }
+
+  $interval = new DateInterval($delta);
+  if ($invert) {
+    $interval->invert = 1;
   }
 
   // No break after 'drop' so it will reuse the code of 'resize'.
   switch ($action) {
     case 'drop':
-      $item['value'] = date($format, strtotime($old_start . $delta));
+      $item['value'] = DateTime::createFromFormat($format, $item['value'])
+        ->add($interval)
+        ->format($format);
     case 'resize':
-      $item['value2'] = date($format, strtotime($old_end . $delta));
+      $item['value2'] = DateTime::createFromFormat($format, $item['value2'])
+        ->add($interval)
+        ->format($format);
       break;
   }
 
