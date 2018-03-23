@@ -12,6 +12,7 @@ Drupal.fullcalendar.plugins.fullcalendar = {
     }
 
     var options = {
+      height: "auto",
       eventClick: function (calEvent, jsEvent, view) {
         if (settings.sameWindow) {
           window.open(calEvent.url, '_self');
